@@ -1,19 +1,32 @@
-name: Push NPM
-on: push
+name: Push to Cloudsmith
+
+on:
+  push:
+    branches:
+      - main
+
 jobs:
   push:
     runs-on: ubuntu-latest
-    name: NPM Push Demo
     steps:
-      - uses: actions/checkout@v4
-      - name: Push
-        id: push
-        uses: ./
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
-          api-key: ${{ secrets.CLOUDSMITH_API_KEY }}
-          command: "push"
-          format: "npm"
-          owner: "padrien33"
-          repo: "npm"
-          republish: "true" # needed ONLY if version is not changing
-          file: "test/fixture/cloudsmith-npm-example-1.0.0.tgz" #real file that will repeat versions
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Pack the npm package
+        run: npm pack
+
+      - name: Install Cloudsmith CLI
+        run: pip install --upgrade cloudsmith-cli
+
+      - name: Push to Cloudsmith
+        run: |
+          cloudsmith push npm padrien33/npm *.tgz --api-key ${{ secrets.CLOUDSMITH_API_KEY }}
+
