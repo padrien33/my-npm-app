@@ -1,0 +1,19 @@
+name: Push NPM
+on: push
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    name: NPM Push Demo
+    steps:
+      - uses: actions/checkout@v4
+      - name: Push
+        id: push
+        uses: ./
+        with:
+          api-key: ${{ secrets.CLOUDSMITH_API_KEY }}
+          command: "push"
+          format: "npm"
+          owner: "padrien33"
+          repo: "npm"
+          republish: "true" # needed ONLY if version is not changing
+          file: "test/fixture/cloudsmith-npm-example-1.0.0.tgz" #real file that will repeat versions
