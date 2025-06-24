@@ -28,5 +28,4 @@ jobs:
 
       - name: Push to Cloudsmith
         run: |
-          cloudsmith push npm padrien33/npm *.tgz --api-key ${{ secrets.CLOUDSMITH_API_KEY }}
-
+          cloudsmith push npm padrien33/npm *.tgz --api-key ${{ secrets.CLOUDSMITH_API_KEY }} --republish
