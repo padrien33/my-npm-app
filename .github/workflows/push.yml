@@ -27,4 +27,4 @@ jobs:
 
       - name: Push to Cloudsmith
         run: |
-          cloudsmith push npm padrien33/shopify-demo *.tgz --api-key ${{ secrets.CLOUDSMITH_API_KEY }} --republish
+          cloudsmith push npm padrien33/shopify-demo *.tgz --api-key ${{ secrets.CLOUDSMITH_API_KEY }} --republish --tags CI
