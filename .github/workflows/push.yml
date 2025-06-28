@@ -1,10 +1,12 @@
 name: Push to Cloudsmith
 
 on:
-  push:
-    branches:
-      - main
-
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'my-npm-app version (e.g. 1.0.0)'
+        required: true
+        default: '1.0.0'
 jobs:
   push:
     runs-on: ubuntu-latest
