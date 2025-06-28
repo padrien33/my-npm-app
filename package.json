@@ -1,6 +1,6 @@
 {
   "name": "nodejs-github-actions-demo",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A simple Node.js app to demonstrate GitHub Actions CI",
   "main": "src/app.js",
   "scripts": {
